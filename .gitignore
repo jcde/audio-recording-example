@@ -1,3 +1,13 @@
-node_modules/**/*
+node_modules/*
+!node_modules/expo-av
+node_modules/expo-av/*
+!node_modules/expo-av/build
+node_modules/expo-av/build/*
+!node_modules/expo-av/build/ExponentAV.web.js
+!node_modules/expo-av/build/Audio
+node_modules/expo-av/build/Audio/*
+!node_modules/expo-av/build/Audio/Recording.js
+
 .expo/*
-npm-debug.*
+yarn-error.log*
+.vscode
