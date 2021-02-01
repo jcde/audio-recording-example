@@ -2,12 +2,13 @@ import React from "react";
 import {
   Dimensions,
   Image,
-  Slider,
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
+  Platform,
 } from "react-native";
+import Slider from "@react-native-community/slider";
 import { Audio, AVPlaybackStatus } from "expo-av";
 import * as FileSystem from "expo-file-system";
 import * as Font from "expo-font";
@@ -198,8 +199,14 @@ export default class App extends React.Component<Props, State> {
       });
       return;
     }
-    const info = await FileSystem.getInfoAsync(this.recording.getURI() || "");
-    console.log(`FILE INFO: ${JSON.stringify(info)}`);
+
+    if (Platform.OS == 'web') {
+      console.log(`FILE URL: ${this.recording.getURI()}`);
+    }
+    else {
+      const info = await FileSystem.getInfoAsync(this.recording.getURI() || "");
+      console.log(`FILE INFO: ${JSON.stringify(info)}`);
+    }
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -618,6 +625,8 @@ const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: BACKGROUND_COLOR,
+    width: 100,
+    height: 100,
   },
   textButton: {
     backgroundColor: BACKGROUND_COLOR,
